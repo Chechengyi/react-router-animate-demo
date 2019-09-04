@@ -30,6 +30,7 @@ export const lazyload = Com => {
                 })
         };
         render(){
+            /* 错误示范 */
             // if ( this.state.com ) {
             //     return (
             //         <CSSTransition
@@ -44,6 +45,7 @@ export const lazyload = Com => {
             // } else {
             //     return null
             // }
+            /* 正确做法 */
             return (
                 <CSSTransition
                     in={this.state.loadIn}

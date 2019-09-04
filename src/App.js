@@ -18,27 +18,41 @@ function App() {
           ))}
         </ul>
       </div>
+          {/*{*/}
+          {/*    routerMenu.map( item=> {*/}
+          {/*       return (*/}
+          {/*           item.redirect ?*/}
+          {/*               <Redirect path='/' exact to={item.to} />:*/}
+          {/*               <Route*/}
+          {/*                   path={item.path}*/}
+          {/*                   key={item.path}*/}
+          {/*                   render={ props=> (*/}
+          {/*                       <CSSTransition*/}
+          {/*                           in={props.match !== null}*/}
+          {/*                           timeout={500}*/}
+          {/*                           classNames="scroll"*/}
+          {/*                           key={item.path}*/}
+          {/*                       >*/}
+          {/*                           <item.component {...props} />*/}
+          {/*                       </CSSTransition>*/}
+          {/*                   ) }*/}
+          {/*               />*/}
+          {/*       )*/}
+          {/*    })*/}
+          {/*}*/}
           {
               routerMenu.map( item=> {
-                 return (
-                     item.redirect ?
-                         <Redirect path='/' exact to={item.to} />:
-                         <Route
-                             path={item.path}
-                             key={item.path}
-                             // component={item.component}
-                             render={ props=> (
-                                 <CSSTransition
-                                     in={props.match !== null}
-                                     timeout={500}
-                                     classNames="scroll"
-                                     key={item.path}
-                                 >
-                                     <item.component {...props} />
-                                 </CSSTransition>
-                             ) }
-                         />
-                 )
+                  return (
+                      item.redirect ?
+                          <Redirect path='/' exact to={item.to} />:
+                          <Route
+                              path={item.path}
+                              key={item.path}
+                              render={ props=> (
+                                  <item.component {...props} />
+                              ) }
+                          />
+                  )
               })
           }
       </Router>
