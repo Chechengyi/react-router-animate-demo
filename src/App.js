@@ -1,24 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { CSSTransition } from 'react-transition-group'
+import routerMenu from './router'
+import { Route, BrowserRouter as Router, Link, Redirect } from 'react-router-dom'
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+      <div className="left-menu">
+        <ul>
+          {routerMenu.map( item=> (
+              !item.redirect && <li key={item.title} className='menu-item'>
+                  <Link to={item.path}>{item.title}</Link>
+              </li>
+          ))}
+        </ul>
+      </div>
+          {
+              routerMenu.map( item=> {
+                 return (
+                     item.redirect ?
+                         <Redirect path='/' exact to={item.to} />:
+                         <Route
+                             path={item.path}
+                             key={item.path}
+                             // component={item.component}
+                             render={ props=> (
+                                 <CSSTransition
+                                     in={props.match !== null}
+                                     timeout={500}
+                                     classNames="scroll"
+                                     key={item.path}
+                                 >
+                                     <item.component {...props} />
+                                 </CSSTransition>
+                             ) }
+                         />
+                 )
+              })
+          }
+      </Router>
     </div>
   );
 }
